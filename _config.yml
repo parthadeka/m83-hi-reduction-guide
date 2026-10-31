@@ -1,4 +1,4 @@
-title: M83 HI data reduction, step by step
+title: M83 HI reduction guide
 description: A beginner's guide to reducing MeerKAT HI data of the galaxy M83, explained with the plots from a real reduction.
 remote_theme: just-the-docs/just-the-docs@v0.12.0
 plugins:
