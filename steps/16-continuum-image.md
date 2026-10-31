@@ -16,9 +16,6 @@ Imaging stage: `continuum` · CASA tasks: `tclean` (mfs, auto-multithresh), `ims
 
 ---
 
-{: .pending }
-> This step was still running when this page was written. The results and plots will be added when it finishes.
-
 ## What this step does
 
 This step makes one image of the **radio continuum**: all the emission that is not the HI line. This step is not in the notes; we added it. It is a useful by-product:
@@ -37,7 +34,7 @@ common = dict(vis=vis_hi, imagename='M83_continuum_robust0', spw='0:1250~1420;15
               **MOSAIC)
 tclean(niter=0, **common)                                         # dirty image
 tclean(niter=100000, threshold=5 * rms0, calcpsf=False, **common)  # clean pass 1
-tclean(niter=100000, threshold=3 * rms1, calcpsf=False, **common)  # clean pass 2
+tclean(niter=100000, threshold=3 * rms1, calcpsf=False, **common)  # clean pass 2 (not reached, see below)
 ```
 
 | Parameter | Value | Why |
@@ -51,16 +48,61 @@ tclean(niter=100000, threshold=3 * rms1, calcpsf=False, **common)  # clean pass 
 | `calcpsf` | `False` in the passes | The PSF was already made in the dirty run. Reusing it saves time. |
 | `restart` | (default `True`) | Each pass continues from the model of the pass before. |
 
-## What we know so far
+## What happened in our run
 
-- **Dirty image RMS: 0.36 mJy/beam.** This is much higher than the thermal noise we expect for the continuum.
-- **Expected thermal noise:** we use 392 line-free channels (about 10 MHz). The noise per channel is about 0.5 mJy, so the noise of 392 channels together is about 0.5 / √392 ≈ **25 µJy**. Robust 0 costs about 1.3–1.5 ×, so we expect **about 35 µJy/beam**.
-- **Why is the dirty image 10 times worse?** In a dirty image, every bright source spreads its sidelobes over the whole field. M83 is a very bright continuum source (about 2 Jy), and there are many background sources. Their sidelobes are counted as "noise". Cleaning removes them.
-- **Clean pass 1** was going well in a test run: the brightest remaining peak dropped from 40 mJy to 1.8 mJy in five major cycles, and about 4.1 Jy of flux had been cleaned (M83 plus the field sources).
+### Clean pass 1 stalled
+
+| Major cycle | Components cleaned | Model flux | Peak residual after the major cycle |
+|:--|--:|--:|--:|
+| 1 | 259 | 1.09 Jy | 140 mJy |
+| 2 | 1438 | 2.44 Jy | 40 mJy |
+| 3 | 6675 | 3.91 Jy | 12.9 mJy |
+| 4 | 1521 | 4.12 Jy | 4.4 mJy |
+| 5 | 81 | 4.11 Jy | 2.7 mJy |
+| 6 | 9 | 4.11 Jy | 2.6 mJy |
+
+Each minor cycle reached the threshold (1.8 mJy). But after every major cycle, the peak residual was back at about 2.5 mJy, so tclean started another major cycle (about 2.5 hours each), cleaned only a few components, and repeated. The model flux stopped growing.
+
+{: .plain }
+> The remaining 2.5 mJy peaks are not real sky emission that cleaning could remove. They are **artefacts** from calibration errors: 2.5 mJy out of 4 Jy is a dynamic range of about 1:1600, a typical limit for an image without self-calibration. Cleaning cannot remove calibration errors, so the clean would never reach its threshold. Pass 2, with an even lower threshold, would have run for days.
+
+We stopped the job, and made the final image from the model and residual already on disk, without any more cleaning (a separate stage, `continuum_restore`: `tclean` with `niter=0, calcres=False, calcpsf=False, restart=True`).
+
+{: .problem }
+> **A clean that never ends.** If the threshold is below the level of the artefacts, tclean keeps running major cycles that remove almost nothing.
+>
+> **Cure:** watch the log: if the number of components per cycle drops to a few, and the peak residual stops falling, stop. Set `nmajor` (a maximum number of major cycles), use `nsigma` instead of a fixed threshold, and fix the calibration (self-calibration) before cleaning deeper.
+
+### The image
+
+{% include fig.html src="13_imaging/continuum_robust0.png" caption="Continuum image of the line-free channels (robust 0), after clean pass 1. Colour scale −0.5 to 1.2 mJy/beam, so M83 (about 2 Jy in total) is strongly saturated. Axes are pixels of 3 arcseconds (the image is cropped to the mosaic)." %}
+
+**Noise:** about **0.22–0.24 mJy/beam** (dirty image: 0.36 mJy/beam). The thermal noise we expect for 10 MHz of bandwidth is about 0.035 mJy/beam, so the noise is still **6–7 times** higher than the thermal limit. The image is limited by artefacts, not by the receivers.
+
+**What we see:**
+
+- **M83** in the centre, bright and saturated, with its spiral disk visible.
+- **A dark, negative ring around M83** (radius about 7–10 arcminutes). This is a **negative bowl**: M83 has faint, extended continuum emission that was not fully cleaned (the automatic mask covered only the bright parts, and `hogbom` cleans with point-like components, which is poor for extended emission). The uncleaned extended emission leaves negative sidelobes around the galaxy.
+- **Rings and ripples around bright sources far from the centre** (for example on the left and right edges, and at the bottom). These sources are in the outer parts of the primary beams, where small errors in the beam model, in the pointing, or in the ionosphere are largest. These are **direction-dependent errors**: the gain calibration is correct in one direction (on average) but not for every direction in the field.
+- **Large, faint patches** brighter and darker than average across the field: sidelobes of all the sources below 1.8 mJy that were never cleaned.
+- **Hundreds of background radio sources**, most of them distant galaxies (active galactic nuclei). Some are **extended radio galaxies**: a curved source with a tail to the left of M83, a hook-shaped source in the north, and a double source on the left. Their shapes come from jets of plasma bent by the gas they move through.
+
+{: .ours }
+> For the HI work, this image is good enough: it shows where the continuum is, and how bright it is. As a science image of M83's continuum it is not competitive yet: the ASKAP EMU survey reaches about 0.025–0.03 mJy/beam in this part of the sky.
+
+### How to improve it
+
+| Problem | Cure |
+|:--|:--|
+| Negative bowl around M83 | `deconvolver='multiscale'` (for example `scales=[0, 5, 15, 45]` pixels), which cleans with components of several sizes, and a larger mask around M83 |
+| Rings around bright sources | Self-calibration (below); for sources far out in the beam, direction-dependent calibration |
+| Many faint sources never cleaned | Clean deeper, after self-calibration, with `nsigma` and `nmajor` limits |
+| Very slow | `parallel=True` (with mpicasa), or WSClean, which is much faster for continuum |
+| Only 10 MHz of bandwidth | Use the full L band (about 856–1712 MHz) from the raw data, with `deconvolver='mtmfs'` |
 
 ### Running time
 
-This stage is slow: each major cycle takes 40–80 minutes, and the automatic masking adds up to 45 minutes more per cycle. It runs on **one core** (`parallel=False`), because only the cube imaging had been tested in parallel. CASA 6 can also run continuum (`mfs`) imaging in parallel; this would make each major cycle many times faster. **For the next run, switch this stage to parallel.**
+Each major cycle took about 1 h 45 min, and the automatic masking up to 45 min more. It ran on **one core** (`parallel=False`), because only the cube imaging had been tested in parallel. CASA 6 can also run continuum (`mfs`) imaging in parallel; this would make each major cycle many times faster. **For the next run, switch this stage to parallel.**
 
 ## Possible next step: self-calibration
 

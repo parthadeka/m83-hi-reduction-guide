@@ -104,3 +104,4 @@ All outputs are under `/idia/projects/hixobz/M83/`:
 | Remaining problem | One short spike in one target scan near 07:03 UTC; to be flagged |
 | Line-free channel noise | 0.527 mJy/beam (natural), as predicted (0.50–0.55 mJy) |
 | HI detected | 355–660 km/s; extended disk, outer arms, and three compact companions |
+| Continuum image | 0.22–0.24 mJy/beam (thermal limit ~0.035); limited by artefacts: a negative bowl around M83 and rings around bright off-centre sources |
