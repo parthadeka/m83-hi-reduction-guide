@@ -1,0 +1,8 @@
+{% assign files = site.static_files | where_exp: "f", "f.path contains include.match" | sort: "path" %}
+<details class="gallery">
+  <summary>{{ include.title | default: "Show the plots for all antennas" }} ({{ files.size }} images, click to open)</summary>
+  <div class="gallery-grid">
+  {% for f in files %}<a href="{{ f.path | relative_url }}"><img src="{{ f.path | relative_url }}" alt="{{ f.basename }}" loading="lazy"><span>{{ f.basename | split: "_" | last }}</span></a>
+  {% endfor %}
+  </div>
+</details>

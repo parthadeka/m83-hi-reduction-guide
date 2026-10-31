@@ -1,0 +1,39 @@
+title: M83 HI data reduction, step by step
+description: A beginner's guide to reducing MeerKAT HI data of the galaxy M83, explained with the plots from a real reduction.
+remote_theme: just-the-docs/just-the-docs@v0.12.0
+plugins:
+  - jekyll-remote-theme
+url: https://parthadeka.github.io
+baseurl: /m83-hi-reduction-guide
+
+color_scheme: light
+search_enabled: true
+heading_anchors: true
+back_to_top: true
+back_to_top_text: "Back to top"
+
+aux_links:
+  "GitHub repository":
+    - "https://github.com/parthadeka/m83-hi-reduction-guide"
+
+footer_content: "MeerKAT observation 1575768670 (8 December 2019). Reduced with CASA 6.7.2, following the 2019 CASA 5.6.2 reduction notes."
+
+callouts:
+  plain:
+    title: In plain words
+    color: green
+  problem:
+    title: Possible problem
+    color: red
+  note:
+    title: Note
+    color: blue
+  ours:
+    title: In our data
+    color: purple
+  pending:
+    title: Still running
+    color: yellow
+
+exclude:
+  - README.md

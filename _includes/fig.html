@@ -1,0 +1,4 @@
+<figure class="plot">
+  <a href="{{ include.src | prepend: '/assets/plots/' | relative_url }}"><img src="{{ include.src | prepend: '/assets/plots/' | relative_url }}" alt="{{ include.alt | default: include.caption }}" loading="lazy"></a>
+  {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>
