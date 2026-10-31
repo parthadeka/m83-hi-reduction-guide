@@ -6,7 +6,7 @@ plugins:
 url: https://parthadeka.github.io
 baseurl: /m83-hi-reduction-guide
 
-color_scheme: light
+color_scheme: black
 search_enabled: true
 heading_anchors: true
 back_to_top: true
