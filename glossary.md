@@ -195,6 +195,9 @@ All the technical words used in this guide, in alphabetical order, explained sim
 **Noise (RMS, σ)**
 : The random fluctuations in the data or image. Usually measured as the RMS (root mean square). "3σ" means three times the noise.
 
+**Optical depth (τ)**
+: How strongly gas absorbs: the fraction of light that gets through is e<sup>−τ</sup>. For HI absorption, τ = −ln(S/S<sub>c</sub>).
+
 **Parallactic angle**
 : The angle between the dish (its feeds and beam) and the sky. It changes as a source moves across the sky, so a fixed, non-round beam turns on the sky during an observation.
 
@@ -270,6 +273,9 @@ All the technical words used in this guide, in alphabetical order, explained sim
 **Spectral window (spw)**
 : A block of frequency channels. Our data has one, number 0.
 
+**Spin temperature (T<sub>s</sub>)**
+: A temperature that describes how the HI atoms are spread over the two levels of the 21 cm line. For cold gas it is close to the gas temperature. The HI column density from absorption scales with it.
+
 **Standing wave**
 : A ripple in the bandpass caused by signal reflections inside the receiver or between the dish and the receiver.
 
@@ -290,6 +296,9 @@ All the technical words used in this guide, in alphabetical order, explained sim
 
 **uv coverage / uv plane**
 : The set of all baselines, as seen from the source, in wavelengths. More complete coverage gives cleaner images.
+
+**uv range (kλ)**
+: A selection of baselines by their length, in thousands of wavelengths (kλ). Long baselines only see small structures; at 21 cm, 5 kλ is about 1 km.
 
 **Visibility**
 : The basic measurement of an interferometer: one complex number per baseline, time, channel and polarisation.

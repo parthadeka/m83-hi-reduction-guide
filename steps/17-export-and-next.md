@@ -107,3 +107,4 @@ All outputs are under `/idia/projects/hixobz/M83/`:
 | HI detected | 355–660 km/s; extended disk, outer arms, and three compact companions |
 | Continuum image (step 16) | 0.22–0.24 mJy/beam (thermal limit ~0.035); limited by artefacts: a negative bowl around M83 and rings around bright off-centre sources |
 | Continuum after self-calibration (step 18) | 0.038 mJy/beam in the centre of the mosaic, close to the thermal limit; no bowl, no rings |
+| HI absorption at the nucleus (step 19) | About 9.5 mJy absorbed against a compact source (< 5″); τ ≥ 0.37, N<sub>HI</sub> ≥ 3.8 × 10<sup>21</sup> cm<sup>−2</sup> for T<sub>s</sub> = 100 K; centred at the systemic velocity |

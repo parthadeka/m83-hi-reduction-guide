@@ -61,6 +61,7 @@ Our dataset is quite clean and well behaved. That is good for learning, but it a
 | 16 | [Continuum image]({{ '/steps/16-continuum-image/' | relative_url }}) | An image of the radio continuum (not the HI line) |
 | 17 | [Export and next steps]({{ '/steps/17-export-and-next/' | relative_url }}) | Save to FITS, and find the gas properly with SoFiA |
 | 18 | [Continuum self-calibration]({{ '/steps/18-continuum-selfcal/' | relative_url }}) | Improve the calibration with the target itself, and make a 6 times deeper continuum mosaic |
+| 19 | [HI absorption at the nucleus]({{ '/steps/19-hi-absorption/' | relative_url }}) | Cold gas in front of M83's nucleus, confirmed with long baselines |
 
 ## The software
 
