@@ -36,11 +36,11 @@ All the technical words used in this guide, in alphabetical order, explained sim
 **Briggs weighting (robust)**
 : A weighting scheme between natural (`robust=+2`) and uniform (`robust=−2`). See *weighting*.
 
-**Calibrator**
-: A source with known properties, used to measure the telescope's errors. See *flux calibrator*, *bandpass calibrator*, *gain calibrator*.
-
 **Calibration**
 : Measuring and removing the effects of the telescope and atmosphere on the data.
+
+**Calibrator**
+: A source with known properties, used to measure the telescope's errors. See *flux calibrator*, *bandpass calibrator*, *gain calibrator*.
 
 **CARTA**
 : Cube Analysis and Rendering Tool for Astronomy. An interactive viewer for large images and cubes.
@@ -84,6 +84,9 @@ All the technical words used in this guide, in alphabetical order, explained sim
 **Delay**
 : A timing difference between the signals of two antennas. It makes the phase change linearly with frequency.
 
+**Direction-dependent errors / calibration**
+: Calibration errors that are different in different directions of the field (from the primary beam shape, dish pointing or the ionosphere). They show as rings or "spokes" around bright sources far from the pointing centre. Direction-dependent calibration (for example with killMS and DDFacet) solves gains for several directions separately.
+
 **Dirty image / dirty beam**
 : The image made directly from the gridded visibilities, before cleaning; and the image of a point source made the same way.
 
@@ -92,6 +95,9 @@ All the technical words used in this guide, in alphabetical order, explained sim
 
 **Dump time / integration time**
 : How often the correlator writes out data. Here every 8 seconds.
+
+**Dynamic range**
+: The brightest value in an image divided by the noise. It measures how well bright and faint things can be seen in the same image.
 
 **Field**
 : One position on the sky that the telescope looked at.
@@ -132,17 +138,20 @@ All the technical words used in this guide, in alphabetical order, explained sim
 **HI**
 : Neutral atomic hydrogen. It emits a spectral line at 1420.405752 MHz (21 cm wavelength).
 
+**I/O bound**
+: A job whose speed is limited by reading and writing the disk, not by the CPU.
+
 **Interferometer**
 : A telescope made of many antennas whose signals are combined in pairs.
 
 **Interpolation**
 : Estimating a value between two measurements. We interpolate the gains linearly between calibrator scans.
 
-**I/O bound**
-: A job whose speed is limited by reading and writing the disk, not by the CPU.
-
 **Jansky (Jy)**
 : The unit of flux density in radio astronomy. 1 Jy = 10<sup>−26</sup> W m<sup>−2</sup> Hz<sup>−1</sup>. 1 mJy = 0.001 Jy; 1 µJy = 0.000001 Jy.
+
+**katbeam**
+: SARAO's Python model of the measured MeerKAT primary beam (for L band: `JimBeam('MKAT-AA-L-JIM-2020')`).
 
 **Line emission**
 : Emission at one specific frequency, such as the HI line.
@@ -152,6 +161,9 @@ All the technical words used in this guide, in alphabetical order, explained sim
 
 **LSRK**
 : Kinematic local standard of rest. A reference frame for velocities that removes the motion of the Earth and Sun.
+
+**MAD (median absolute deviation)**
+: A robust way to measure noise: the median of the distances from the median. Multiplied by 1.4826 it equals the RMS for pure noise, but a few bright sources hardly change it.
 
 **Major / minor cycle**
 : In cleaning: a major cycle goes through all the visibilities to make a new residual image; minor cycles find clean components in the image between major cycles.
@@ -174,11 +186,17 @@ All the technical words used in this guide, in alphabetical order, explained sim
 **mpicasa**
 : The tool that runs CASA on several CPU cores at once (in parallel).
 
+**Multi-scale clean**
+: A clean that uses components of several sizes (points and smooth blobs), instead of points only. Much better for extended emission.
+
 **Natural weighting**
 : All visibilities get the same weight. Lowest noise, larger beam.
 
 **Noise (RMS, σ)**
 : The random fluctuations in the data or image. Usually measured as the RMS (root mean square). "3σ" means three times the noise.
+
+**Parallactic angle**
+: The angle between the dish (its feeds and beam) and the sky. It changes as a source moves across the sky, so a fixed, non-round beam turns on the sky during an observation.
 
 **Phase**
 : The angle part of a complex number. For a visibility it says how the waves from the two antennas line up in time. Only phase *differences* and *changes* matter.
@@ -258,11 +276,11 @@ All the technical words used in this guide, in alphabetical order, explained sim
 **Stokes I**
 : Total intensity: the average of XX and YY.
 
-**Systemic velocity**
-: The velocity of a galaxy as a whole. M83's is about 513 km/s.
-
 **System temperature (T<sub>sys</sub>)**
 : A measure of how much noise the receiver and the sky add to the signal.
+
+**Systemic velocity**
+: The velocity of a galaxy as a whole. M83's is about 513 km/s.
 
 **tclean**
 : CASA's task for imaging and cleaning.
@@ -279,8 +297,11 @@ All the technical words used in this guide, in alphabetical order, explained sim
 **Voxel**
 : One element of a cube: one sky pixel in one channel.
 
+**W20, W50**
+: The width of an HI profile, measured at 20% and 50% of its peak.
+
 **Weighting**
 : How much each visibility counts when making the image. Natural, uniform and Briggs (robust) weighting give different beams and noise.
 
-**W20, W50**
-: The width of an HI profile, measured at 20% and 50% of its peak.
+**WSClean**
+: A fast imaging and cleaning program, widely used for MeerKAT data.

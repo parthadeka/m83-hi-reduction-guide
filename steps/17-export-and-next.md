@@ -88,6 +88,7 @@ All outputs are under `/idia/projects/hixobz/M83/`:
 | `reports/` | Text and JSON summaries: listobs, flags, delays, fluxes, noise |
 | `images/` | Noise test, cubes, moments, continuum, FITS files |
 | `sofia/` | SoFiA outputs |
+| `selfcal/` | Continuum self-calibration ([step 18](../18-continuum-selfcal/)): per-pointing MSs, images, calibration tables, reports, and the final mosaic |
 | `logs/` | CASA and slurm logs |
 | `script/` | The scripts and parameter files |
 
@@ -104,4 +105,5 @@ All outputs are under `/idia/projects/hixobz/M83/`:
 | Remaining problem | One short spike in one target scan near 07:03 UTC; to be flagged |
 | Line-free channel noise | 0.527 mJy/beam (natural), as predicted (0.50–0.55 mJy) |
 | HI detected | 355–660 km/s; extended disk, outer arms, and three compact companions |
-| Continuum image | 0.22–0.24 mJy/beam (thermal limit ~0.035); limited by artefacts: a negative bowl around M83 and rings around bright off-centre sources |
+| Continuum image (step 16) | 0.22–0.24 mJy/beam (thermal limit ~0.035); limited by artefacts: a negative bowl around M83 and rings around bright off-centre sources |
+| Continuum after self-calibration (step 18) | 0.038 mJy/beam in the centre of the mosaic, close to the thermal limit; no bowl, no rings |

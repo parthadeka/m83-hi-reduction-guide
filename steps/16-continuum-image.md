@@ -16,6 +16,9 @@ Imaging stage: `continuum` · CASA tasks: `tclean` (mfs, auto-multithresh), `ims
 
 ---
 
+{: .note }
+> This image was later replaced by a self-calibrated mosaic about 6 times deeper (0.038 mJy/beam). See [step 18](../18-continuum-selfcal/).
+
 ## What this step does
 
 This step makes one image of the **radio continuum**: all the emission that is not the HI line. This step is not in the notes; we added it. It is a useful by-product:
@@ -95,7 +98,7 @@ We stopped the job, and made the final image from the model and residual already
 | Problem | Cure |
 |:--|:--|
 | Negative bowl around M83 | `deconvolver='multiscale'` (for example `scales=[0, 5, 15, 45]` pixels), which cleans with components of several sizes, and a larger mask around M83 |
-| Rings around bright sources | Self-calibration (below); for sources far out in the beam, direction-dependent calibration |
+| Rings around bright sources | Self-calibration ([step 18](../18-continuum-selfcal/)); for sources far out in the beam, direction-dependent calibration |
 | Many faint sources never cleaned | Clean deeper, after self-calibration, with `nsigma` and `nmajor` limits |
 | Very slow | `parallel=True` (with mpicasa), or WSClean, which is much faster for continuum |
 | Only 10 MHz of bandwidth | Use the full L band (about 856–1712 MHz) from the raw data, with `deconvolver='mtmfs'` |

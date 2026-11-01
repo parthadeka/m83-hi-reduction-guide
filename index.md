@@ -60,12 +60,14 @@ Our dataset is quite clean and well behaved. That is good for learning, but it a
 | 15 | [Moment maps]({{ '/steps/15-moments/' | relative_url }}) | Turn the 3D cube into 2D maps of gas amount, motion and speed spread |
 | 16 | [Continuum image]({{ '/steps/16-continuum-image/' | relative_url }}) | An image of the radio continuum (not the HI line) |
 | 17 | [Export and next steps]({{ '/steps/17-export-and-next/' | relative_url }}) | Save to FITS, and find the gas properly with SoFiA |
+| 18 | [Continuum self-calibration]({{ '/steps/18-continuum-selfcal/' | relative_url }}) | Improve the calibration with the target itself, and make a 6 times deeper continuum mosaic |
 
 ## The software
 
 - **CASA** (Common Astronomy Software Applications), version **6.7.2**. CASA is the standard program for reducing radio interferometer data. The original reduction notes used the older CASA 5.6.2. A few task names changed between versions; the pages say where.
 - The work ran on the **ilifu** computing cluster in Cape Town, using **slurm** (a system that queues and runs long jobs on the cluster's computers).
-- Two Python scripts did all the work: `m83_pipeline.py` (steps 1 to 12) and `m83_imaging.py` (steps 13 to 17).
+- Two Python scripts did steps 1 to 17: `m83_pipeline.py` (steps 1 to 12) and `m83_imaging.py` (steps 13 to 17).
+- Step 18 uses **WSClean** (a fast imaging program) with CASA for the self-calibration, and **katbeam** (a model of the MeerKAT primary beam).
 
 {: .note }
 > The scripts follow a set of reduction notes written in December 2019 for this same observation. When this guide says "the notes", it means those notes. Most parameter values come from them. Where we changed something, the page says so and explains why.
