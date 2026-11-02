@@ -33,6 +33,9 @@ All the technical words used in this guide, in alphabetical order, explained sim
 **Beam**
 : Used for two different things. The **primary beam** is the sensitivity pattern of one dish on the sky (about 1° wide for MeerKAT at 1.4 GHz). The **synthesised beam** (or PSF) is the image of a point source made by the whole interferometer (about 25–30″ in our HI cube).
 
+**Beam smearing**
+: The widening of spectra (and flattening of velocity gradients) because one beam covers gas at different velocities. Strongest near a galaxy centre, where rotation changes fast with position.
+
 **Briggs weighting (robust)**
 : A weighting scheme between natural (`robust=+2`) and uniform (`robust=−2`). See *weighting*.
 
@@ -153,6 +156,9 @@ All the technical words used in this guide, in alphabetical order, explained sim
 **katbeam**
 : SARAO's Python model of the measured MeerKAT primary beam (for L band: `JimBeam('MKAT-AA-L-JIM-2020')`).
 
+**Kinematic major axis**
+: The direction across a rotating disk along which the measured velocities change most: where the gas moves most directly towards and away from us.
+
 **Line emission**
 : Emission at one specific frequency, such as the HI line.
 
@@ -231,6 +237,9 @@ All the technical words used in this guide, in alphabetical order, explained sim
 **Reference frame (TOPO, LSRK, BARY)**
 : The frame in which frequencies and velocities are measured. TOPO moves with the telescope; LSRK and BARY remove the Earth's motion.
 
+**Reliability filter**
+: SoFiA's test that removes detections likely to be noise, by comparing the positive detections with the negative ones that pure noise also produces.
+
 **Residual**
 : What is left in the image after the clean components have been removed.
 
@@ -308,6 +317,9 @@ All the technical words used in this guide, in alphabetical order, explained sim
 
 **W20, W50**
 : The width of an HI profile, measured at 20% and 50% of its peak.
+
+**Warp**
+: A disk whose outer parts are tilted differently from its inner parts. It shows as twisted lines of equal velocity in a velocity field.
 
 **Weighting**
 : How much each visibility counts when making the image. Natural, uniform and Briggs (robust) weighting give different beams and noise.

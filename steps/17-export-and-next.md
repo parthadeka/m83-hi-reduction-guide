@@ -44,6 +44,8 @@ The files are written to `images/fits/`: both cubes (`.image`, `.image.pbcor`, `
 
 ### What SoFiA gives us
 
+The results are on [step 20](../20-sofia-results/).
+
 - a **catalogue** of all HI sources in the cube: M83, and probably its dwarf companions (the three compact sources seen in the moment 0 map);
 - for each source: position, **total flux** (from which we get the **HI mass**), **systemic velocity**, line widths **W20** and **W50** (the width of the profile at 20% and 50% of the peak), and orientation;
 - clean **moment 0, 1 and 2 maps**, without noise speckles;
@@ -107,4 +109,5 @@ All outputs are under `/idia/projects/hixobz/M83/`:
 | HI detected | 355–660 km/s; extended disk, outer arms, and three compact companions |
 | Continuum image (step 16) | 0.22–0.24 mJy/beam (thermal limit ~0.035); limited by artefacts: a negative bowl around M83 and rings around bright off-centre sources |
 | Continuum after self-calibration (step 18) | 0.038 mJy/beam in the centre of the mosaic, close to the thermal limit; no bowl, no rings |
+| M83's HI (SoFiA, step 20) | S<sub>int</sub> ≥ 802 Jy km/s, M<sub>HI</sub> ≥ 4.5 × 10<sup>9</sup> M<sub>☉</sub> (D = 4.9 Mpc); W<sub>50</sub> = 261 km/s; v<sub>sys</sub> = 512 km/s; neighbours NGC 5264, UGCA 365 and one unidentified source |
 | HI absorption at the nucleus (step 19) | About 9.5 mJy absorbed against a compact source (< 5″); τ ≥ 0.37, N<sub>HI</sub> ≥ 3.8 × 10<sup>21</sup> cm<sup>−2</sup> for T<sub>s</sub> = 100 K; centred at the systemic velocity |
